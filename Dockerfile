@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 LABEL maintainer="Bastian Kleinschmidt <debaschdi@googlemail.com>" \
       org.label-schema.docker.dockerfile="/Dockerfile" \
