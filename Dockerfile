@@ -4,7 +4,7 @@ LABEL maintainer="Bastian Kleinschmidt <debaschdi@googlemail.com>" \
       org.label-schema.docker.dockerfile="/Dockerfile" \
       org.label-schema.name="docker.new-telerising-api"
 
-ARG DEPENDENCIES="sed curl wget git perl nano net-tools unzip ca-certificates"
+ARG DEPENDENCIES="sed curl wget git perl nano net-tools unzip ca-certificates gcc"
 
 ENV USER_ID="99" \
     GROUP_ID="100" \
@@ -32,7 +32,8 @@ RUN apt-get -qy update \
     && echo "path-exclude=/usr/share/man/*" >> /etc/dpkg/dpkg.cfg.d/docker-noman \
     && echo "path-exclude=/usr/share/doc/*" >> /etc/dpkg/dpkg.cfg.d/docker-nodoc \
     && echo "path-include=/usr/share/doc/*/copyright" >> /etc/dpkg/dpkg.cfg.d/docker-nodoc \
-    ### install basic packages
+    ### install basic packages \
+    && apt-get update \
     && apt-get install -qy apt-utils locales tzdata gpg\
     ### limit locale to en_US.UTF-8
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
